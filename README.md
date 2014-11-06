@@ -1,5 +1,5 @@
-ca-ra-liquidbase-pack
+ca-ra-liquibase-pack
 =====================
 
-CA Release Automation Action Pack for Liquidbase
+CA Release Automation Action Pack for Liquibase
  
