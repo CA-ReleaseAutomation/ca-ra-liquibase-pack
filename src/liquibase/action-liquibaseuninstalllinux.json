@@ -1,0 +1,65 @@
+{
+   "SCRIPTAction" : {
+      "actionPack" : {
+         "name" : "Liquibase",
+         "category" : "Liquibase",
+         "description" : "Integration actions for Liquibase, the database versioning tool.",
+         "author" : "CA Technologies",
+         "dependencies" : "",
+         "platform" : "Windows and Linux",
+         "version" : "0.1  ",
+         "license" : "",
+         "imageLocation" : "http://localhost:8080/RDKServer/workingDirectory/ActionPacks/liquibase/liquibase_logo-40.png",
+         "lastModified" : "2014-11-06T00:49:46.835-08:00",
+         "tags" : [ ],
+         "packageName" : "liquibase"
+      },
+      "name" : "Liquibase - UnInstall - Linux",
+      "description" : "Uninstall Liquibase from the installation directory on a Linux system.",
+      "inputParamList" : [ {
+         "name" : "Install Directory",
+         "type" : "String",
+         "description" : "Directory for the installation of Liquibase once downloaded.",
+         "required" : true,
+         "variableName" : "installdirectory",
+         "arrayOption" : false
+      } ],
+      "outputParamList" : [ {
+         "name" : "Execution Output",
+         "type" : "String",
+         "description" : "Standard out from the command execution.",
+         "filterValue" : "[\\s\\S]*",
+         "filterType" : "REGEX",
+         "variableName" : "executionoutput",
+         "source" : "standardOut",
+         "arrayOption" : false
+      } ],
+      "type" : "SCRIPT",
+      "complete" : true,
+      "lastModified" : "2014-11-06T00:49:55.332-08:00",
+      "className" : "LiquibaseUnInstallLinux",
+      "packageName" : "com.ca.liquibase",
+      "shellType" : "DEFAULT_OS",
+      "scripts" : [ {
+         "content" : "",
+         "envVariables" : [ {
+         } ],
+         "execDir" : "",
+         "name" : "",
+         "osType" : "WINDOWS",
+         "overwriteOutput" : true,
+         "timeout" : 0,
+         "waitForProcess" : false
+      }, {
+         "content" : "rm ${Install Directory}/liquibase.jar",
+         "envVariables" : [ {
+         } ],
+         "execDir" : "",
+         "name" : "LiquibaseUnInstallLinux1415263795321.sh",
+         "osType" : "LINUX",
+         "overwriteOutput" : true,
+         "timeout" : 0,
+         "waitForProcess" : false
+      } ]
+   }
+}

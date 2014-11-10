@@ -1,0 +1,1 @@
+rm ${Install Directory}/liquibase.jar

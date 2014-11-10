@@ -1,0 +1,71 @@
+{
+   "SCRIPTAction" : {
+      "actionPack" : {
+         "name" : "Liquibase",
+         "category" : "Liquibase",
+         "description" : "Integration actions for Liquibase, the database versioning tool.",
+         "author" : "CA Technologies",
+         "dependencies" : "",
+         "platform" : "Windows and Linux",
+         "version" : "0.1  ",
+         "license" : "",
+         "imageLocation" : "http://localhost:8080/RDKServer/workingDirectory/ActionPacks/liquibase/liquibase_logo-40.png",
+         "lastModified" : "2014-11-06T00:49:46.835-08:00",
+         "tags" : [ ],
+         "packageName" : "liquibase"
+      },
+      "name" : "Liquibase - Install - Windows",
+      "description" : "Install Liquibase on a Windows target system.",
+      "inputParamList" : [ {
+         "name" : "URL to Zip File",
+         "type" : "String",
+         "description" : "The URL to the zip file to download.",
+         "required" : true,
+         "variableName" : "urltozipfile",
+         "arrayOption" : false
+      }, {
+         "name" : "Temp Zip Path",
+         "type" : "String",
+         "description" : "Path to the local storage of the zip file once downloaded.",
+         "required" : true,
+         "variableName" : "tempzippath",
+         "arrayOption" : false
+      }, {
+         "name" : "Install Directory",
+         "type" : "String",
+         "description" : "Directory for the installation of Liquibase once downloaded.",
+         "required" : true,
+         "variableName" : "installdirectory",
+         "arrayOption" : false
+      } ],
+      "outputParamList" : [ {
+         "name" : "Execution Output",
+         "type" : "String",
+         "description" : "Standard out from the command execution.",
+         "filterValue" : "[\\s\\S]*",
+         "filterType" : "REGEX",
+         "variableName" : "executionoutput",
+         "source" : "standardOut",
+         "arrayOption" : false
+      } ],
+      "type" : "SCRIPT",
+      "complete" : true,
+      "lastModified" : "2014-11-06T00:49:54.255-08:00",
+      "className" : "LiquibaseInstallWindows",
+      "packageName" : "com.ca.liquibase",
+      "shellType" : "POWERSHELL",
+      "powerShellScript" : {
+         "content" : "###########################################################\n# AUTHOR  : Andrii Dziuba\n# DATE    : 2014-02-13\n# COMMENT : Download and extract liqubase archive\n###########################################################\n \n#ERROR REPORTING ALL\nSet-StrictMode -Version latest\n \n#---------------------------------------------------------- \n#STATIC VARIABLES\n#----------------------------------------------------------\n$search = \"liquibase\"\n$fileExt = \".jar\"\n$dest   = \"${Install Directory}\"\n$zips   = \"${Temp Zip Path}\"\n$url = \"${URL to Zip File}\"\n\nFunction DownloadURL\n{\n\tWrite-Host \"please wait file is downloading...\"\n\t$wc = New-Object System.Net.WebClient\n\t$wc.DownloadFile($url, $zips)\n\tWrite-Host \"downloaded file: $zips , from: $url\"\n}\n \n#----------------------------------------------------------\n#FUNCTION GetZipFileItems\n#----------------------------------------------------------\nFunction GetZipFileItems\n{\n#  Param([string]$zip)\n  \n  $shell   = New-Object -Com Shell.Application\n  $zipItem = $shell.NameSpace($zips)\n  $items   = $zipItem.Items()\n  GetZipFileItemsRecursive $items\n}\n\n#----------------------------------------------------------\n#FUNCTION GetZipFileItemsRecursive\n#----------------------------------------------------------\nFunction GetZipFileItemsRecursive\n{\n  Param([object]$items)\n\n  ForEach($item In $items)\n  {\n    If ($item.GetFolder -ne $Null)\n    {\n      GetZipFileItemsRecursive $item.GetFolder.items()\n    }\n    $strItem = [string]$item.Name\n\t$strItemExt = [string][System.IO.Path]::GetExtension($item.Path)\n    If ($strItem -Like \"*$search*\" -and $strItemExt -eq $fileExt)\n    {\n      If ((Test-Path ($dest + \"\\\" + $strItem)) -eq $False)\n      {\n        $shell.NameSpace($dest).CopyHere($item)\n\t\tWrite-Host \"Copied file : $strItem from zip-file : $zips to destination folder: $dest\"\n\t\treturn\n      }\n      Else\n      {\n        Write-Host \"File : $strItem already exists in destination folder\"\n      }\n    }\n  }\n}\n\nFunction DeleteNotNeededFiles\n{\n\tRemove-Item $zips\n\tWrite-Host \"File:$zips is deleted\"\n}\n \nFunction RunAll\n{\n\tDownloadURL\n\tGetZipFileItems\n\t\n\tIf ((Test-Path ($dest + \"\\\" + $search + $fileExt)) -eq $False)\n  \t{\n  \t\tWrite-Host \"File:$search$fileExt  not found in $zips\"\n  \t}\n\t\n\tDeleteNotNeededFiles\n}\n\n#RUN SCRIPT\nRunAll\n\"Done, Thank You\"",
+         "execDir" : "",
+         "location" : "",
+         "name" : "",
+         "overwriteOutput" : false,
+         "timeout" : 0,
+         "waitForProcess" : false,
+         "executionTimeout" : 30,
+         "expectedReturnCode" : 200,
+         "options" : [ {
+         } ]
+      }
+   }
+}

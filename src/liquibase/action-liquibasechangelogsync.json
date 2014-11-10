@@ -1,0 +1,114 @@
+{
+   "SCRIPTAction" : {
+      "actionPack" : {
+         "name" : "Liquibase",
+         "category" : "Liquibase",
+         "description" : "Integration actions for Liquibase, the database versioning tool.",
+         "author" : "CA Technologies",
+         "dependencies" : "",
+         "platform" : "Windows and Linux",
+         "version" : "0.1  ",
+         "license" : "",
+         "imageLocation" : "http://localhost:8080/RDKServer/workingDirectory/ActionPacks/liquibase/liquibase_logo-40.png",
+         "lastModified" : "2014-11-06T00:49:46.835-08:00",
+         "tags" : [ ],
+         "packageName" : "liquibase"
+      },
+      "name" : "Liquibase - Change Log Sync",
+      "description" : "Mark all changes as executed in the database.",
+      "inputParamList" : [ {
+         "name" : "Liquibase jar file",
+         "type" : "String",
+         "description" : "The path to the liquibase jar file.  This is often in the root folder of the liquibase download, and called liquibase.jar.",
+         "required" : true,
+         "variableName" : "liquibasejarfile",
+         "arrayOption" : false
+      }, {
+         "name" : "JDBC Driver Path",
+         "type" : "String",
+         "description" : "The path to the JDBC Driver file for the target database.",
+         "required" : true,
+         "variableName" : "jdbcdriverpath",
+         "arrayOption" : false
+      }, {
+         "name" : "Change Log Path",
+         "type" : "String",
+         "description" : "The path to the Liquibase Change Log.",
+         "required" : true,
+         "variableName" : "changelogpath",
+         "arrayOption" : false
+      }, {
+         "name" : "URL",
+         "type" : "String",
+         "description" : "The URL to the target database.",
+         "required" : true,
+         "variableName" : "url",
+         "arrayOption" : false
+      }, {
+         "name" : "Username",
+         "type" : "String",
+         "description" : "The username for the target database for authentication.",
+         "required" : false,
+         "variableName" : "username",
+         "arrayOption" : false
+      }, {
+         "name" : "Password",
+         "type" : "String",
+         "description" : "The password for the target database for authentication.",
+         "required" : false,
+         "variableName" : "password",
+         "arrayOption" : false
+      }, {
+         "name" : "JDBC Driver Class Name",
+         "type" : "String",
+         "description" : "The class name of the JDBC Driver (so that Liquibase can register the driver).",
+         "required" : true,
+         "variableName" : "jdbcdriverclassname",
+         "arrayOption" : false
+      }, {
+         "name" : "Options",
+         "type" : "String",
+         "description" : "Any additional options that should be included on the command line for the execution of this command.",
+         "required" : false,
+         "variableName" : "options",
+         "arrayOption" : false
+      } ],
+      "outputParamList" : [ {
+         "name" : "Execution Output",
+         "type" : "String",
+         "description" : "Standard out from the command execution.",
+         "filterValue" : "[\\s\\S]*",
+         "filterType" : "REGEX",
+         "variableName" : "executionoutput",
+         "source" : "standardOut",
+         "arrayOption" : false
+      } ],
+      "type" : "SCRIPT",
+      "complete" : true,
+      "lastModified" : "2014-11-06T00:49:53.656-08:00",
+      "className" : "LiquibaseChangeLogSync",
+      "packageName" : "com.ca.liquibase",
+      "shellType" : "DEFAULT_OS",
+      "scripts" : [ {
+         "content" : "java -jar ${Liquibase jar file} --driver=${JDBC Driver Class Name} --classpath=${JDBC Driver Path} --changeLogFile=${Change Log Path} --url=\"${URL}\"  --username=${Username} --password=${Password} ${Options} changeLogSync",
+         "envVariables" : [ {
+         } ],
+         "execDir" : "",
+         "name" : "LiquibaseChangeLogSync1415263793636.bat",
+         "osType" : "WINDOWS",
+         "overwriteOutput" : true,
+         "timeout" : 0,
+         "waitForProcess" : false
+      }, {
+         "content" : "java -jar ${Liquibase jar file} --driver=${JDBC Driver Class Name} --classpath=${JDBC Driver Path} --changeLogFile=${Change Log Path} --url=\"${URL}\"  --username=${Username} --password=${Password} ${Options} changeLogSync",
+         "envVariables" : [ {
+         } ],
+         "execDir" : "",
+         "name" : "LiquibaseChangeLogSync1415263793652.sh",
+         "osType" : "LINUX",
+         "overwriteOutput" : true,
+         "timeout" : 0,
+         "waitForProcess" : false
+      } ]
+   }
+}

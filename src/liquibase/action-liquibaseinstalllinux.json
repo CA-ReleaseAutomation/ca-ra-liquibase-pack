@@ -1,0 +1,71 @@
+{
+   "SCRIPTAction" : {
+      "actionPack" : {
+         "name" : "Liquibase",
+         "category" : "Liquibase",
+         "description" : "Integration actions for Liquibase, the database versioning tool.",
+         "author" : "CA Technologies",
+         "dependencies" : "",
+         "platform" : "Windows and Linux",
+         "version" : "0.1  ",
+         "license" : "",
+         "imageLocation" : "http://localhost:8080/RDKServer/workingDirectory/ActionPacks/liquibase/liquibase_logo-40.png",
+         "lastModified" : "2014-11-06T00:49:46.835-08:00",
+         "tags" : [ ],
+         "packageName" : "liquibase"
+      },
+      "name" : "Liquibase - Install - Linux",
+      "description" : "The URL to the tar file to download.",
+      "inputParamList" : [ {
+         "name" : "URL to Tar File",
+         "type" : "String",
+         "required" : true,
+         "variableName" : "urltotarfile",
+         "arrayOption" : false
+      }, {
+         "name" : "Install Directory",
+         "type" : "String",
+         "description" : "Directory for the installation of Liquibase once downloaded.",
+         "required" : true,
+         "variableName" : "installdirectory",
+         "arrayOption" : false
+      } ],
+      "outputParamList" : [ {
+         "name" : "Execution Output",
+         "type" : "String",
+         "description" : "Standard out from the command execution.",
+         "filterValue" : "[\\s\\S]*",
+         "filterType" : "REGEX",
+         "variableName" : "executionoutput",
+         "source" : "standardOut",
+         "arrayOption" : false
+      } ],
+      "type" : "SCRIPT",
+      "complete" : true,
+      "lastModified" : "2014-11-06T00:49:54.197-08:00",
+      "className" : "LiquibaseInstallLinux",
+      "packageName" : "com.ca.liquibase",
+      "shellType" : "DEFAULT_OS",
+      "scripts" : [ {
+         "content" : "",
+         "envVariables" : [ {
+         } ],
+         "execDir" : "%HOME%",
+         "name" : "",
+         "osType" : "WINDOWS",
+         "overwriteOutput" : false,
+         "timeout" : 0,
+         "waitForProcess" : false
+      }, {
+         "content" : "wget ${URL to Tar File} -O liquibase.tar.gz\ntar -zxvf liquibase.tar.gz liquibase.jar\nmv liquibase.jar ${Install Directory}/",
+         "envVariables" : [ {
+         } ],
+         "execDir" : "",
+         "name" : "LiquibaseInstallLinux1415263794178.sh",
+         "osType" : "LINUX",
+         "overwriteOutput" : true,
+         "timeout" : 0,
+         "waitForProcess" : false
+      } ]
+   }
+}
