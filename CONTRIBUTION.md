@@ -6,7 +6,7 @@ We are glad you want to contribute to CA Release Automation!
 
 We have a simple process that utilizes the [GitHub](https://guides.github.com/introduction/flow/index.html) and **Github Issues**:
 
-1. Sign or be added to an existing [Contributor License Agreement (CLA)](https://communities.ca.com/become-a-contributor).
+1. Sign or be added to an existing Contributor License Agreement (CLA)
 1. Sign up or login to your [GitHub account](https://github.com/signup/free)
 1. Fork the repository on GitHub
 1. Reporting an issue or making a feature request [here](#issues).
@@ -48,10 +48,6 @@ ask questions about contributing, or just hang out with CA Release Automation So
 Licensing is very important to open source projects. It helps ensure the
   software continues to be available under the terms that the author desired.
 
-CA Release Automation uses [the Eclipse 1.0 license](https://www.github.com/ca-releaseautomation/LICENSE)
-  to strike a balance between open contribution and allowing you to use the
-  software however you would like to.
-
 The license tells you what rights you have that are provided by the copyright holder.
   It is important that the contributor fully understands what rights they are
   licensing and agrees to them. Sometimes the copyright holder isn't the contributor,
@@ -66,7 +62,7 @@ To make a good faith effort to ensure these criteria are met, CA Release Automat
 It only takes a few minutes to complete a CLA.
 
 You can complete our:
-  [CLA](https://www.clahub.com/agreements/CA-ReleaseAutomation/ca-ra-nginx-pack) online.
+  [CLA](https://www.clahub.com/agreements/CA-ReleaseAutomation/ca-ra-liquibase-pack) online.
   
 ### CA Release Automation Obvious Fix Policy
 
